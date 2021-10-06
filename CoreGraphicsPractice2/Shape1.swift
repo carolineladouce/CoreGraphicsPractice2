@@ -17,17 +17,15 @@ class Shape1: UIView {
      }
      */
     
-    let shapeBackgroundColor = UIColor.lightGray
-    let shapeShadowingColor = UIColor.darkGray
+    let shapeBackgroundColor = UIColor.orange
+    let shapeBaseColor = UIColor.lightGray
     
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else {
             fatalError("\(#function):\(#line) Failed to get current context.")
         }
         
-        context.setFillColor(shapeBackgroundColor.cgColor)
-        context.fill(rect)
-        
+
         let drawingSize = CGSize(width: 100, height: 200)
         
         UIGraphicsBeginImageContextWithOptions(drawingSize, true, 0.0)
@@ -42,30 +40,42 @@ class Shape1: UIView {
         // Layout the background shape path
         let backgroundShapePath = UIBezierPath()
         backgroundShapePath.move(to: CGPoint(x: 0, y: 0))
-        backgroundShapePath.addLine(to: CGPoint(x: 1, y: 2))
-        backgroundShapePath.addLine(to: CGPoint(x: 0, y: 4))
-        backgroundShapePath.addLine(to: CGPoint(x: 1, y: 6))
-        backgroundShapePath.addLine(to: CGPoint(x: 0, y: 8))
-        backgroundShapePath.addLine(to: CGPoint(x: 1, y: 10))
-        backgroundShapePath.addLine(to: CGPoint(x: 0, y: 12))
-        backgroundShapePath.addLine(to: CGPoint(x: 1, y: 14))
-        backgroundShapePath.addLine(to: CGPoint(x: 0, y: 16))
-        backgroundShapePath.addLine(to: CGPoint(x: 1, y: 18))
-        backgroundShapePath.addLine(to: CGPoint(x: 0, y: 20))
         backgroundShapePath.addLine(to: CGPoint(x: 10, y: 20))
-        backgroundShapePath.addLine(to: CGPoint(x: 9, y: 18))
-        backgroundShapePath.addLine(to: CGPoint(x: 10, y: 16))
-        backgroundShapePath.addLine(to: CGPoint(x: 9, y: 14))
-        backgroundShapePath.addLine(to: CGPoint(x: 10, y: 12))
-        backgroundShapePath.addLine(to: CGPoint(x: 9, y: 10))
-        backgroundShapePath.addLine(to: CGPoint(x: 10, y: 8))
-        backgroundShapePath.addLine(to: CGPoint(x: 9, y: 6))
-        backgroundShapePath.addLine(to: CGPoint(x: 10, y: 4))
-        backgroundShapePath.addLine(to: CGPoint(x: 9, y: 2))
-        backgroundShapePath.addLine(to: CGPoint(x: 10, y: 0))
+        backgroundShapePath.addLine(to: CGPoint(x: 0, y: 40))
+        backgroundShapePath.addLine(to: CGPoint(x: 10, y: 60))
+        backgroundShapePath.addLine(to: CGPoint(x: 0, y: 80))
+        backgroundShapePath.addLine(to: CGPoint(x: 10, y: 100))
+        backgroundShapePath.addLine(to: CGPoint(x: 0, y: 120))
+        backgroundShapePath.addLine(to: CGPoint(x: 10, y: 140))
+        backgroundShapePath.addLine(to: CGPoint(x: 0, y: 160))
+        backgroundShapePath.addLine(to: CGPoint(x: 10, y: 180))
+        backgroundShapePath.addLine(to: CGPoint(x: 0, y: 200))
+        backgroundShapePath.addLine(to: CGPoint(x: 100, y: 200))
+        backgroundShapePath.addLine(to: CGPoint(x: 90, y: 180))
+        backgroundShapePath.addLine(to: CGPoint(x: 100, y: 160))
+        backgroundShapePath.addLine(to: CGPoint(x: 90, y: 140))
+        backgroundShapePath.addLine(to: CGPoint(x: 100, y: 120))
+        backgroundShapePath.addLine(to: CGPoint(x: 90, y: 100))
+        backgroundShapePath.addLine(to: CGPoint(x: 100, y: 80))
+        backgroundShapePath.addLine(to: CGPoint(x: 90, y: 60))
+        backgroundShapePath.addLine(to: CGPoint(x: 100, y: 40))
+        backgroundShapePath.addLine(to: CGPoint(x: 90, y: 20))
+        backgroundShapePath.addLine(to: CGPoint(x: 100, y: 0))
         backgroundShapePath.close()
+
+        shapeBaseColor.setFill()
+        backgroundShapePath.fill()
+        
+        guard let image = UIGraphicsGetImageFromCurrentImageContext()
+                else { fatalError("""
+    \(#function):\(#line) Failed to \
+    get an image from current context.
+    """)
+        }
         
         UIGraphicsEndImageContext()
+        
+        UIColor(patternImage: image).setFill()
         context.fill(rect)
         
     } // End func
