@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         
         // Setup shape1
         view.addSubview(shape1)
+        shape1.backgroundColor = UIColor.clear
         shape1.translatesAutoresizingMaskIntoConstraints = false
         
         // Constraints

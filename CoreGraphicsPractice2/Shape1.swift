@@ -17,15 +17,16 @@ class Shape1: UIView {
      }
      */
     
-    let shapeBackgroundColor = UIColor.orange
+    //let shapeBackgroundColor = UIColor.clear
     let shapeBaseColor = UIColor.lightGray
+    
+    
     
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else {
             fatalError("\(#function):\(#line) Failed to get current context.")
         }
         
-
         let drawingSize = CGSize(width: 100, height: 200)
         
         UIGraphicsBeginImageContextWithOptions(drawingSize, true, 0.0)
@@ -34,7 +35,9 @@ class Shape1: UIView {
             fatalError("\(#function):\(#line) Failed to get current context.")
         }
         
-        shapeBackgroundColor.setFill()
+        
+        
+        //shapeBackgroundColor.setFill()
         drawingContext.fill(CGRect(x: 0, y: 0, width: drawingSize.width, height: drawingSize.height))
         
         // Layout the background shape path
@@ -79,6 +82,7 @@ class Shape1: UIView {
         context.fill(rect)
         
     } // End func
+    
     
     
     

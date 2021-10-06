@@ -16,6 +16,7 @@
 		C667301B270CA1F900E67560 /* CoreGraphicsPractice2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C667301A270CA1F900E67560 /* CoreGraphicsPractice2UITests.swift */; };
 		C667301D270CA1F900E67560 /* CoreGraphicsPractice2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C667301C270CA1F900E67560 /* CoreGraphicsPractice2UITestsLaunchTests.swift */; };
 		C667302A270CAA8700E67560 /* Shape1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6673029270CAA8700E67560 /* Shape1.swift */; };
+		C6673068270E0A0100E67560 /* Shape2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6673067270E0A0100E67560 /* Shape2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C667301A270CA1F900E67560 /* CoreGraphicsPractice2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsPractice2UITests.swift; sourceTree = "<group>"; };
 		C667301C270CA1F900E67560 /* CoreGraphicsPractice2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsPractice2UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C6673029270CAA8700E67560 /* Shape1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape1.swift; sourceTree = "<group>"; };
+		C6673067270E0A0100E67560 /* Shape2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				C6672FFB270CA1F600E67560 /* SceneDelegate.swift */,
 				C6672FFD270CA1F600E67560 /* ViewController.swift */,
 				C6673029270CAA8700E67560 /* Shape1.swift */,
+				C6673067270E0A0100E67560 /* Shape2.swift */,
 				C6673002270CA1F900E67560 /* Assets.xcassets */,
 				C6673004270CA1F900E67560 /* LaunchScreen.storyboard */,
 				C6673007270CA1F900E67560 /* Info.plist */,
@@ -259,6 +262,7 @@
 			files = (
 				C6672FFE270CA1F600E67560 /* ViewController.swift in Sources */,
 				C667302A270CAA8700E67560 /* Shape1.swift in Sources */,
+				C6673068270E0A0100E67560 /* Shape2.swift in Sources */,
 				C6672FFA270CA1F600E67560 /* AppDelegate.swift in Sources */,
 				C6672FFC270CA1F600E67560 /* SceneDelegate.swift in Sources */,
 			);
