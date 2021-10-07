@@ -17,10 +17,7 @@ class Shape1: UIView {
      }
      */
     
-    //let shapeBackgroundColor = UIColor.clear
     let shapeBaseColor = UIColor.lightGray
-    
-    
     
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else {
@@ -36,8 +33,6 @@ class Shape1: UIView {
         }
         
         
-        
-        //shapeBackgroundColor.setFill()
         drawingContext.fill(CGRect(x: 0, y: 0, width: drawingSize.width, height: drawingSize.height))
         
         // Layout the background shape path
@@ -65,12 +60,12 @@ class Shape1: UIView {
         backgroundShapePath.addLine(to: CGPoint(x: 90, y: 20))
         backgroundShapePath.addLine(to: CGPoint(x: 100, y: 0))
         backgroundShapePath.close()
-
+        
         shapeBaseColor.setFill()
         backgroundShapePath.fill()
         
         guard let image = UIGraphicsGetImageFromCurrentImageContext()
-                else { fatalError("""
+        else { fatalError("""
     \(#function):\(#line) Failed to \
     get an image from current context.
     """)
