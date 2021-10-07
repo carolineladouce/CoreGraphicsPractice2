@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         let view = UIView()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.orange
         
         //        // Setup shape1
         //        view.addSubview(shape1)
