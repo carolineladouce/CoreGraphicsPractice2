@@ -14,12 +14,12 @@ class ViewController: UIViewController {
     let shape2 = Shape2()
     
     // CoreMotion:
-    var maxXAcceleration: Double = 0.0
-    var maxYAcceleration: Double = 0.0
-    var maxZAcceleration: Double = 0.0
-    var maxXRotation: Double = 0.0
-    var maxYRotation: Double = 0.0
-    var maxZRotation: Double = 0.0
+//    var maxXAcceleration: Double = 0.0
+//    var maxYAcceleration: Double = 0.0
+//    var maxZAcceleration: Double = 0.0
+//    var maxXRotation: Double = 0.0
+//    var maxYRotation: Double = 0.0
+//    var maxZRotation: Double = 0.0
     
     var xAcceleration: Double = 0.0
     var yAcceleration: Double = 0.0
@@ -28,69 +28,110 @@ class ViewController: UIViewController {
     var yRotation: Double = 0.0
     var zRotation: Double = 0.0
     
-    var motionManager = CMMotionManager()
+    let motionManager = CMMotionManager()
     
     // Display labels:
-    let maxXAccelerationLabel = UILabel()
-    let maxYAccelerationLabel = UILabel()
-    let maxZAccelerationLabel = UILabel()
-    let maxXRotationLabel = UILabel()
-    let maxYRotationLabel = UILabel()
-    let maxZRotationLabel = UILabel()
+//    let maxXAccelerationLabel = UILabel()
+//    let maxYAccelerationLabel = UILabel()
+//    let maxZAccelerationLabel = UILabel()
+//    let maxXRotationLabel = UILabel()
+//    let maxYRotationLabel = UILabel()
+//    let maxZRotationLabel = UILabel()
     
-    let xAccelerationLabel = UILabel()
-    let yAccelerationLabel = UILabel()
-    let zAccelerationLabel = UILabel()
-    let xRotationLabel = UILabel()
-    let yRotationLabel = UILabel()
-    let zRotationLabel = UILabel()
+    var xAccelerationLabel = UILabel()
+    var yAccelerationLabel = UILabel()
+    var zAccelerationLabel = UILabel()
+    var xRotationLabel = UILabel()
+    var yRotationLabel = UILabel()
+    var zRotationLabel = UILabel()
     
+    
+//    func resetMaxValues() {
+//        maxXAcceleration = 0
+//        maxYAcceleration = 0
+//        maxZAcceleration = 0
+//
+//        maxXRotation = 0
+//        maxYRotation = 0
+//        maxZRotation = 0
+//    }
+
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         let view = UIView()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.orange
         
-        view.addSubview(maxXAccelerationLabel)
-        maxXAccelerationLabel.text = "Max X Acceleration: \(maxXAcceleration)"
-        maxXAccelerationLabel.translatesAutoresizingMaskIntoConstraints = false
-        maxXAccelerationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        maxXAccelerationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -300).isActive = true
+        view.addSubview(xAccelerationLabel)
+        xAccelerationLabel.text = "X Acceleration: \(xAcceleration)"
+        xAccelerationLabel.translatesAutoresizingMaskIntoConstraints = false
+        xAccelerationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        xAccelerationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -300).isActive = true
         
-        view.addSubview(maxYAccelerationLabel)
-        maxYAccelerationLabel.text = "Max Y Acceleration: \(maxYAcceleration)"
-        maxYAccelerationLabel.translatesAutoresizingMaskIntoConstraints = false
-        maxYAccelerationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        maxYAccelerationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -200).isActive = true
+        view.addSubview(yAccelerationLabel)
+        yAccelerationLabel.text = "Y Acceleration: \(yAcceleration)"
+        yAccelerationLabel.translatesAutoresizingMaskIntoConstraints = false
+        yAccelerationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        yAccelerationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -200).isActive = true
         
-        view.addSubview(maxZAccelerationLabel)
-        maxZAccelerationLabel.text = "Max Z Acceleration: \(maxZAcceleration)"
-        maxZAccelerationLabel.translatesAutoresizingMaskIntoConstraints = false
-        maxZAccelerationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        maxZAccelerationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -100).isActive = true
+        view.addSubview(zAccelerationLabel)
+        zAccelerationLabel.text = "Z Acceleration: \(zAcceleration)"
+        zAccelerationLabel.translatesAutoresizingMaskIntoConstraints = false
+        zAccelerationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        zAccelerationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -100).isActive = true
         
-        view.addSubview(maxXRotationLabel)
-        maxXRotationLabel.text = "Max X Rotation: \(maxXRotation)"
-        maxXRotationLabel.translatesAutoresizingMaskIntoConstraints = false
-        maxXRotationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        maxXRotationLabel.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        view.addSubview(xRotationLabel)
+        xRotationLabel.text = "X Rotation: \(xRotation)"
+        xRotationLabel.translatesAutoresizingMaskIntoConstraints = false
+        xRotationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        xRotationLabel.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 
-        view.addSubview(maxYRotationLabel)
-        maxYRotationLabel.text = "Max Y Rotation: \(maxYRotation)"
-        maxYRotationLabel.translatesAutoresizingMaskIntoConstraints = false
-        maxYRotationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        maxYRotationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
+        view.addSubview(yRotationLabel)
+        yRotationLabel.text = "Y Rotation: \(yRotation)"
+        yRotationLabel.translatesAutoresizingMaskIntoConstraints = false
+        yRotationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        yRotationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
 
-        view.addSubview(maxZRotationLabel)
-        maxZRotationLabel.text = "Max Z Rotation: \(maxZRotation)"
-        maxZRotationLabel.translatesAutoresizingMaskIntoConstraints = false
-        maxZRotationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        maxZRotationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 200).isActive = true
+        view.addSubview(zRotationLabel)
+        zRotationLabel.text = "Z Rotation: \(zRotation)"
+        zRotationLabel.translatesAutoresizingMaskIntoConstraints = false
+        zRotationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        zRotationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 200).isActive = true
         
         
         
+        // Set motion manager properties
+        motionManager.accelerometerUpdateInterval = 1
+        motionManager.gyroUpdateInterval = 1
+        
+        motionManager.startAccelerometerUpdates()
+        motionManager.startGyroUpdates()
+        
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if let data = self.motionManager.accelerometerData {
+                self.xAcceleration = data.acceleration.x
+                self.yAcceleration = data.acceleration.y
+                self.zAcceleration = data.acceleration.z
+                
+                self.xAccelerationLabel.text = "X Acceleration: \(self.xAcceleration)"
+                self.yAccelerationLabel.text = "Y Acceleration: \(self.yAcceleration)"
+                self.zAccelerationLabel.text = "Z Acceleration: \(self.zAcceleration)"
+            }
+            
+            if let gyroData = self.motionManager.gyroData {
+                self.xRotation = gyroData.rotationRate.x
+                self.yRotation = gyroData.rotationRate.y
+                self.zRotation = gyroData.rotationRate.z
+                
+                self.xRotationLabel.text = "X Rotation: \(self.xRotation)"
+                self.yRotationLabel.text = "Y Rotation: \(self.yRotation)"
+                self.zRotationLabel.text = "Z Rotation: \(self.zRotation)"
+            }
+            
+        }
         
         
         
@@ -125,6 +166,11 @@ class ViewController: UIViewController {
 //
         
         self.view = view
+    } // End viewDidLoad
+    
+    
+    func updateLabels() {
+        
     }
     
  
