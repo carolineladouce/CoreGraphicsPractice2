@@ -13,14 +13,7 @@ class ViewController: UIViewController {
     let shape1 = Shape1()
     let shape2 = Shape2()
     
-    // CoreMotion:
-//    var maxXAcceleration: Double = 0.0
-//    var maxYAcceleration: Double = 0.0
-//    var maxZAcceleration: Double = 0.0
-//    var maxXRotation: Double = 0.0
-//    var maxYRotation: Double = 0.0
-//    var maxZRotation: Double = 0.0
-    
+    // Acceleration & rotation variables:
     var xAcceleration: Double = 0.0
     var yAcceleration: Double = 0.0
     var zAcceleration: Double = 0.0
@@ -31,13 +24,6 @@ class ViewController: UIViewController {
     let motionManager = CMMotionManager()
     
     // Display labels:
-//    let maxXAccelerationLabel = UILabel()
-//    let maxYAccelerationLabel = UILabel()
-//    let maxZAccelerationLabel = UILabel()
-//    let maxXRotationLabel = UILabel()
-//    let maxYRotationLabel = UILabel()
-//    let maxZRotationLabel = UILabel()
-    
     var xAccelerationLabel = UILabel()
     var yAccelerationLabel = UILabel()
     var zAccelerationLabel = UILabel()
@@ -45,17 +31,6 @@ class ViewController: UIViewController {
     var yRotationLabel = UILabel()
     var zRotationLabel = UILabel()
     
-    
-//    func resetMaxValues() {
-//        maxXAcceleration = 0
-//        maxYAcceleration = 0
-//        maxZAcceleration = 0
-//
-//        maxXRotation = 0
-//        maxYRotation = 0
-//        maxZRotation = 0
-//    }
-
     
     override func viewDidLoad() {
         
@@ -88,13 +63,13 @@ class ViewController: UIViewController {
         xRotationLabel.translatesAutoresizingMaskIntoConstraints = false
         xRotationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         xRotationLabel.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-
+        
         view.addSubview(yRotationLabel)
         yRotationLabel.text = "Y Rotation: \(yRotation)"
         yRotationLabel.translatesAutoresizingMaskIntoConstraints = false
         yRotationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         yRotationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 100).isActive = true
-
+        
         view.addSubview(zRotationLabel)
         zRotationLabel.text = "Z Rotation: \(zRotation)"
         zRotationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -134,10 +109,6 @@ class ViewController: UIViewController {
         }
         
         
-        
-        
-        
-        
         //        // Setup shape1
         //        view.addSubview(shape1)
         //        shape1.backgroundColor = UIColor.clear
@@ -150,20 +121,20 @@ class ViewController: UIViewController {
         //        shape1.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         
-//        // Setup shape2
-//        view.addSubview(shape2)
-//        shape2.showShape2(show: true)
-//        //shape2.backgroundColor = UIColor.clear
-//        shape2.translatesAutoresizingMaskIntoConstraints = false
-//
-//        // Constraints
-//        shape2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        shape2.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//        //        shape2.bottomAnchor.constraint(equalTo: shape1.topAnchor, constant: 50).isActive = true
-//        shape2.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//        shape2.heightAnchor.constraint(equalToConstant: 200).isActive = true
-//        shape2.contentMode = .scaleAspectFit
-//
+        //        // Setup shape2
+        //        view.addSubview(shape2)
+        //        shape2.showShape2(show: true)
+        //        //shape2.backgroundColor = UIColor.clear
+        //        shape2.translatesAutoresizingMaskIntoConstraints = false
+        //
+        //        // Constraints
+        //        shape2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        //        shape2.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        //        //        shape2.bottomAnchor.constraint(equalTo: shape1.topAnchor, constant: 50).isActive = true
+        //        shape2.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        //        shape2.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        //        shape2.contentMode = .scaleAspectFit
+        //
         
         self.view = view
     } // End viewDidLoad
@@ -173,7 +144,7 @@ class ViewController: UIViewController {
         
     }
     
- 
+    
     
 }
 
