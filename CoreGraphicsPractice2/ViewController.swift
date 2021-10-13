@@ -31,6 +31,8 @@ class ViewController: UIViewController {
     var yRotationLabel = UILabel()
     var zRotationLabel = UILabel()
     
+    var motionDataFetchTimer = Timer()
+    
     
     override func viewDidLoad() {
         
@@ -77,36 +79,37 @@ class ViewController: UIViewController {
         zRotationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 200).isActive = true
         
         
+        startDeviceMotion()
         
-        // Set motion manager properties
-        motionManager.accelerometerUpdateInterval = 1
-        motionManager.gyroUpdateInterval = 1
-        
-        motionManager.startAccelerometerUpdates()
-        motionManager.startGyroUpdates()
-        
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if let data = self.motionManager.accelerometerData {
-                self.xAcceleration = data.acceleration.x
-                self.yAcceleration = data.acceleration.y
-                self.zAcceleration = data.acceleration.z
-                
-                self.xAccelerationLabel.text = "X Acceleration: \(self.xAcceleration)"
-                self.yAccelerationLabel.text = "Y Acceleration: \(self.yAcceleration)"
-                self.zAccelerationLabel.text = "Z Acceleration: \(self.zAcceleration)"
-            }
-            
-            if let gyroData = self.motionManager.gyroData {
-                self.xRotation = gyroData.rotationRate.x
-                self.yRotation = gyroData.rotationRate.y
-                self.zRotation = gyroData.rotationRate.z
-                
-                self.xRotationLabel.text = "X Rotation: \(self.xRotation)"
-                self.yRotationLabel.text = "Y Rotation: \(self.yRotation)"
-                self.zRotationLabel.text = "Z Rotation: \(self.zRotation)"
-            }
-            
-        }
+        //        // Set motion manager properties
+        //        motionManager.accelerometerUpdateInterval = 1
+        //        motionManager.gyroUpdateInterval = 1
+        //
+        //        motionManager.startAccelerometerUpdates()
+        //        motionManager.startGyroUpdates()
+        //
+        //        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+        //            if let data = self.motionManager.accelerometerData {
+        //                self.xAcceleration = data.acceleration.x
+        //                self.yAcceleration = data.acceleration.y
+        //                self.zAcceleration = data.acceleration.z
+        //
+        //                self.xAccelerationLabel.text = "X Acceleration: \(self.xAcceleration)"
+        //                self.yAccelerationLabel.text = "Y Acceleration: \(self.yAcceleration)"
+        //                self.zAccelerationLabel.text = "Z Acceleration: \(self.zAcceleration)"
+        //            }
+        //
+        //            if let gyroData = self.motionManager.gyroData {
+        //                self.xRotation = gyroData.rotationRate.x
+        //                self.yRotation = gyroData.rotationRate.y
+        //                self.zRotation = gyroData.rotationRate.z
+        //
+        //                self.xRotationLabel.text = "X Rotation: \(self.xRotation)"
+        //                self.yRotationLabel.text = "Y Rotation: \(self.yRotation)"
+        //                self.zRotationLabel.text = "Z Rotation: \(self.zRotation)"
+        //            }
+        //
+        //        }
         
         
         //        // Setup shape1
@@ -138,6 +141,43 @@ class ViewController: UIViewController {
         
         self.view = view
     } // End viewDidLoad
+    
+    // Fetching device motion data "on demand"
+    // This data will disclude bias such as gravity
+    func startDeviceMotion() {
+        if motionManager.isDeviceMotionAvailable {
+            self.motionManager.deviceMotionUpdateInterval = 5.0
+            self.motionManager.showsDeviceMovementDisplay = true
+            self.motionManager.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
+            
+            // Set timer to fetch motion data
+            motionDataFetchTimer = Timer(fire: Date(), interval: (5.0), repeats: true, block: { (timer) in
+                if let data = self.motionManager.deviceMotion {
+                    
+                    self.xAcceleration = data.userAcceleration.x
+                    self.yAcceleration = data.userAcceleration.y
+                    self.zAcceleration = data.userAcceleration.z
+                    
+                    self.xAccelerationLabel.text = "X Acceleration: \(self.xAcceleration)"
+                    self.yAccelerationLabel.text = "Y Acceleration: \(self.yAcceleration)"
+                    self.zAccelerationLabel.text = "Z Acceleration: \(self.zAcceleration)"
+                    
+                    
+                    
+                    self.xRotation = data.attitude.pitch
+                    self.yRotation = data.attitude.roll
+                    self.zRotation = data.attitude.yaw
+                    
+                    self.xRotationLabel.text = "X Rotation: \(self.xRotation)"
+                    self.yRotationLabel.text = "Y Rotation: \(self.yRotation)"
+                    self.zRotationLabel.text = "Z Rotation: \(self.zRotation)"
+                }
+            })
+            
+            RunLoop.current.add(self.motionDataFetchTimer, forMode: RunLoop.Mode.default)
+        }
+    }
+    
     
     
     func updateLabels() {
