@@ -34,6 +34,9 @@ class ViewController: UIViewController {
     var motionDataFetchTimer = Timer()
     
     
+    
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -124,34 +127,47 @@ class ViewController: UIViewController {
         //        shape1.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         
-        //        // Setup shape2
-        //        view.addSubview(shape2)
-        //        shape2.showShape2(show: true)
-        //        //shape2.backgroundColor = UIColor.clear
-        //        shape2.translatesAutoresizingMaskIntoConstraints = false
-        //
-        //        // Constraints
-        //        shape2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        //        shape2.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        //        //        shape2.bottomAnchor.constraint(equalTo: shape1.topAnchor, constant: 50).isActive = true
-        //        shape2.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        //        shape2.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        //        shape2.contentMode = .scaleAspectFit
-        //
+//                // Setup shape2
+//                view.addSubview(shape2)
+//                shape2.showShape2(show: true)
+//                //shape2.backgroundColor = UIColor.clear
+//                shape2.translatesAutoresizingMaskIntoConstraints = false
+//
+//                // Constraints
+//                shape2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//                shape2.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+//                //        shape2.bottomAnchor.constraint(equalTo: shape1.topAnchor, constant: 50).isActive = true
+//                shape2.widthAnchor.constraint(equalToConstant: 100).isActive = true
+//                shape2.heightAnchor.constraint(equalToConstant: 200).isActive = true
+//                shape2.contentMode = .scaleAspectFit
+        
+    
         
         self.view = view
+        
+        
+        
+        
+        
     } // End viewDidLoad
+    
+    
+    
+    
+    
+    
+    
     
     // Fetching device motion data "on demand"
     // This data will disclude bias such as gravity
     func startDeviceMotion() {
         if motionManager.isDeviceMotionAvailable {
-            self.motionManager.deviceMotionUpdateInterval = 5.0
+            self.motionManager.deviceMotionUpdateInterval = 1.0
             self.motionManager.showsDeviceMovementDisplay = true
             self.motionManager.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
             
             // Set timer to fetch motion data
-            motionDataFetchTimer = Timer(fire: Date(), interval: (5.0), repeats: true, block: { (timer) in
+            motionDataFetchTimer = Timer(fire: Date(), interval: (1.0), repeats: true, block: { (timer) in
                 if let data = self.motionManager.deviceMotion {
                     
                     self.xAcceleration = data.userAcceleration.x
@@ -171,20 +187,23 @@ class ViewController: UIViewController {
                     self.xRotationLabel.text = "X Rotation: \(self.xRotation)"
                     self.yRotationLabel.text = "Y Rotation: \(self.yRotation)"
                     self.zRotationLabel.text = "Z Rotation: \(self.zRotation)"
+                    
+                    //self.shape2.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: +(10000 * self.xAcceleration)).isActive = true
+                    //shape2.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+                    
+                    
+                    
                 }
             })
             
             RunLoop.current.add(self.motionDataFetchTimer, forMode: RunLoop.Mode.default)
         }
     }
+
     
-    
-    
-    func updateLabels() {
-        
+    // disable screen auto rotate
+    override open var shouldAutorotate: Bool {
+        return false
     }
-    
-    
-    
 }
 
