@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     
     var motionDataFetchTimer = Timer()
     
-    
+    var backgroundColorBlock = CALayer()
     
     
     
@@ -44,6 +44,9 @@ class ViewController: UIViewController {
         
         let view = UIView()
         view.backgroundColor = UIColor.orange
+        
+        view.layer.addSublayer(backgroundColorBlock)
+        backgroundColorBlock.frame = view.bounds
         
         view.addSubview(xAccelerationLabel)
         xAccelerationLabel.text = "X Acceleration: \(xAcceleration)"
@@ -127,21 +130,21 @@ class ViewController: UIViewController {
         //        shape1.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         
-//                // Setup shape2
-//                view.addSubview(shape2)
-//                shape2.showShape2(show: true)
-//                //shape2.backgroundColor = UIColor.clear
-//                shape2.translatesAutoresizingMaskIntoConstraints = false
-//
-//                // Constraints
-//                shape2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//                shape2.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//                //        shape2.bottomAnchor.constraint(equalTo: shape1.topAnchor, constant: 50).isActive = true
-//                shape2.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//                shape2.heightAnchor.constraint(equalToConstant: 200).isActive = true
-//                shape2.contentMode = .scaleAspectFit
+        //                // Setup shape2
+        //                view.addSubview(shape2)
+        //                shape2.showShape2(show: true)
+        //                //shape2.backgroundColor = UIColor.clear
+        //                shape2.translatesAutoresizingMaskIntoConstraints = false
+        //
+        //                // Constraints
+        //                shape2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        //                shape2.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        //                //        shape2.bottomAnchor.constraint(equalTo: shape1.topAnchor, constant: 50).isActive = true
+        //                shape2.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        //                shape2.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        //                shape2.contentMode = .scaleAspectFit
         
-    
+        
         
         self.view = view
         
@@ -152,9 +155,10 @@ class ViewController: UIViewController {
     } // End viewDidLoad
     
     
-    
-    
-    
+    // disable screen auto rotate
+    override open var shouldAutorotate: Bool {
+        return false
+    }
     
     
     
@@ -191,7 +195,7 @@ class ViewController: UIViewController {
                     //self.shape2.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: +(10000 * self.xAcceleration)).isActive = true
                     //shape2.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
                     
-                    
+                    self.animateBackgroundColor()
                     
                 }
             })
@@ -199,11 +203,33 @@ class ViewController: UIViewController {
             RunLoop.current.add(self.motionDataFetchTimer, forMode: RunLoop.Mode.default)
         }
     }
-
     
-    // disable screen auto rotate
-    override open var shouldAutorotate: Bool {
-        return false
+    
+    
+    
+    // Animate the background color change
+    func animateBackgroundColor() {
+        
+        let backgroundColorChangeAnimation = CABasicAnimation(keyPath: "colors")
+        backgroundColorChangeAnimation.duration = 0
+        
+        
+        if self.zRotation < 0 {
+            view.backgroundColor = UIColor.systemPink
+        } else if self.zRotation > 0 {
+            view.backgroundColor = UIColor.systemCyan
+        } else {
+            view.backgroundColor = UIColor.yellow
+        }
+        
+        
+        backgroundColorChangeAnimation.fillMode = CAMediaTimingFillMode.forwards
+        backgroundColorChangeAnimation.isRemovedOnCompletion = false
+        backgroundColorBlock.add(backgroundColorChangeAnimation, forKey: "colorChange")
+        
     }
-}
+    
+    
+    
+} // End class
 
