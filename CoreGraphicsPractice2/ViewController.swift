@@ -33,9 +33,6 @@ class ViewController: UIViewController {
     
     var motionDataFetchTimer = Timer()
     
-    var backgroundColorBlock = CALayer()
-    
-    
     
     override func viewDidLoad() {
         
@@ -43,10 +40,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         let view = UIView()
-        view.backgroundColor = UIColor.orange
         
-        view.layer.addSublayer(backgroundColorBlock)
-        backgroundColorBlock.frame = view.bounds
+        view.backgroundColor = UIColor.orange
         
         view.addSubview(xAccelerationLabel)
         xAccelerationLabel.text = "X Acceleration: \(xAcceleration)"
@@ -161,7 +156,6 @@ class ViewController: UIViewController {
     }
     
     
-    
     // Fetching device motion data "on demand"
     // This data will disclude bias such as gravity
     func startDeviceMotion() {
@@ -205,27 +199,41 @@ class ViewController: UIViewController {
     }
     
     
-    
-    
     // Animate the background color change
     func animateBackgroundColor() {
         
-        let backgroundColorChangeAnimation = CABasicAnimation(keyPath: "colors")
-        backgroundColorChangeAnimation.duration = 0
+        //                if self.zRotation < 0 {
+        //                    backgroundColorBlock.colors = [
+        //                        UIColor.systemCyan,
+        //                        UIColor.systemTeal
+        //                    ]
+        //                } else if self.zRotation > 0 {
+        //                    backgroundColorBlock.colors = [
+        //                        UIColor.systemPink,
+        //                        UIColor.systemPurple
+        //                    ]
+        //                } else {
+        //                    backgroundColorBlock.colors = [
+        //                        UIColor.orange,
+        //                        UIColor.red
+        //                    ]
+        //                }
         
         
-        if self.zRotation < 0 {
-            view.backgroundColor = UIColor.systemPink
-        } else if self.zRotation > 0 {
-            view.backgroundColor = UIColor.systemCyan
-        } else {
-            view.backgroundColor = UIColor.yellow
+        UIView.animate(withDuration: 0.25) {
+            
+            if self.zRotation < 0 {
+                self.view.backgroundColor =
+                UIColor.systemCyan
+            } else if self.zRotation > 0 {
+                self.view.backgroundColor =
+                UIColor.systemPink
+            } else {
+                self.view.backgroundColor =
+                UIColor.red
+            }
         }
         
-        
-        backgroundColorChangeAnimation.fillMode = CAMediaTimingFillMode.forwards
-        backgroundColorChangeAnimation.isRemovedOnCompletion = false
-        backgroundColorBlock.add(backgroundColorChangeAnimation, forKey: "colorChange")
         
     }
     
