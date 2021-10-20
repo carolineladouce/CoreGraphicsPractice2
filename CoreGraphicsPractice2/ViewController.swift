@@ -10,8 +10,21 @@ import CoreMotion
 
 class ViewController: UIViewController {
     
-    let shape1 = Shape1()
-    let shape2 = Shape2()
+    //    let shape1 = Shape1()
+    //    let shape2 = Shape2()
+    
+    var gradientLayer: CAGradientLayer = {
+        var layer = CAGradientLayer()
+        layer.type = .axial
+        layer.colors = [
+            UIColor(red: 255/255, green: 139/255, blue: 118/255, alpha: 1).cgColor,
+            UIColor(red: 87/255, green: 84/255, blue: 255/255, alpha: 1).cgColor
+        ]
+        
+        layer.locations = [0.0, 1.0]
+        
+        return layer
+    }()
     
     // Acceleration & rotation variables:
     var xAcceleration: Double = 0.0
@@ -22,6 +35,7 @@ class ViewController: UIViewController {
     var zRotation: Double = 0.0
     
     let motionManager = CMMotionManager()
+    
     
     // Display labels:
     var xAccelerationLabel = UILabel()
@@ -41,7 +55,9 @@ class ViewController: UIViewController {
         
         let view = UIView()
         
-        view.backgroundColor = UIColor.orange
+        view.backgroundColor = UIColor.white
+        
+        view.layer.addSublayer(gradientLayer)
         
         view.addSubview(xAccelerationLabel)
         xAccelerationLabel.text = "X Acceleration: \(xAcceleration)"
@@ -80,37 +96,37 @@ class ViewController: UIViewController {
         zRotationLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 200).isActive = true
         
         
+        // Set motion manager properties
+        motionManager.accelerometerUpdateInterval = 1
+        motionManager.gyroUpdateInterval = 1
+        
+        motionManager.startAccelerometerUpdates()
+        motionManager.startGyroUpdates()
+        
         startDeviceMotion()
         
-        //        // Set motion manager properties
-        //        motionManager.accelerometerUpdateInterval = 1
-        //        motionManager.gyroUpdateInterval = 1
-        //
-        //        motionManager.startAccelerometerUpdates()
-        //        motionManager.startGyroUpdates()
-        //
-        //        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-        //            if let data = self.motionManager.accelerometerData {
-        //                self.xAcceleration = data.acceleration.x
-        //                self.yAcceleration = data.acceleration.y
-        //                self.zAcceleration = data.acceleration.z
-        //
-        //                self.xAccelerationLabel.text = "X Acceleration: \(self.xAcceleration)"
-        //                self.yAccelerationLabel.text = "Y Acceleration: \(self.yAcceleration)"
-        //                self.zAccelerationLabel.text = "Z Acceleration: \(self.zAcceleration)"
-        //            }
-        //
-        //            if let gyroData = self.motionManager.gyroData {
-        //                self.xRotation = gyroData.rotationRate.x
-        //                self.yRotation = gyroData.rotationRate.y
-        //                self.zRotation = gyroData.rotationRate.z
-        //
-        //                self.xRotationLabel.text = "X Rotation: \(self.xRotation)"
-        //                self.yRotationLabel.text = "Y Rotation: \(self.yRotation)"
-        //                self.zRotationLabel.text = "Z Rotation: \(self.zRotation)"
-        //            }
-        //
-        //        }
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if let data = self.motionManager.accelerometerData {
+                self.xAcceleration = data.acceleration.x
+                self.yAcceleration = data.acceleration.y
+                self.zAcceleration = data.acceleration.z
+                
+                self.xAccelerationLabel.text = "X Acceleration: \(self.xAcceleration)"
+                self.yAccelerationLabel.text = "Y Acceleration: \(self.yAcceleration)"
+                self.zAccelerationLabel.text = "Z Acceleration: \(self.zAcceleration)"
+            }
+            
+            if let gyroData = self.motionManager.gyroData {
+                self.xRotation = gyroData.rotationRate.x
+                self.yRotation = gyroData.rotationRate.y
+                self.zRotation = gyroData.rotationRate.z
+                
+                self.xRotationLabel.text = "X Rotation: \(self.xRotation)"
+                self.yRotationLabel.text = "Y Rotation: \(self.yRotation)"
+                self.zRotationLabel.text = "Z Rotation: \(self.zRotation)"
+            }
+            
+        }
         
         
         //        // Setup shape1
@@ -143,11 +159,13 @@ class ViewController: UIViewController {
         
         self.view = view
         
-        
-        
-        
-        
     } // End viewDidLoad
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = self.view.bounds
+    }
     
     
     // disable screen auto rotate
@@ -201,41 +219,25 @@ class ViewController: UIViewController {
     
     // Animate the background color change
     func animateBackgroundColor() {
-        
-        //                if self.zRotation < 0 {
-        //                    backgroundColorBlock.colors = [
-        //                        UIColor.systemCyan,
-        //                        UIColor.systemTeal
-        //                    ]
-        //                } else if self.zRotation > 0 {
-        //                    backgroundColorBlock.colors = [
-        //                        UIColor.systemPink,
-        //                        UIColor.systemPurple
-        //                    ]
-        //                } else {
-        //                    backgroundColorBlock.colors = [
-        //                        UIColor.orange,
-        //                        UIColor.red
-        //                    ]
-        //                }
-        
-        
-        UIView.animate(withDuration: 0.25) {
-            
+        UIView.animate(withDuration: 1) {
             if self.zRotation < 0 {
-                self.view.backgroundColor =
-                UIColor.systemCyan
+                self.gradientLayer.colors = [
+                    UIColor(red: 255/255, green: 139/255, blue: 118/255, alpha: 1).cgColor,
+                    UIColor(red: 87/255, green: 84/255, blue: 255/255, alpha: 1).cgColor
+                ]
             } else if self.zRotation > 0 {
-                self.view.backgroundColor =
-                UIColor.systemPink
+                self.gradientLayer.colors = [
+                    UIColor(red: 87/255, green: 84/255, blue: 255/255, alpha: 1).cgColor,
+                    UIColor(red: 255/255, green: 139/255, blue: 118/255, alpha: 1).cgColor,
+                ]
             } else {
-                self.view.backgroundColor =
-                UIColor.red
+                self.gradientLayer.colors = [
+                    UIColor.systemGray,
+                    UIColor.lightGray
+                ]
             }
-        }
-        
-        
-    }
+        } // End animation
+    } // End func
     
     
     
