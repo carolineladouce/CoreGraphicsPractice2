@@ -13,18 +13,53 @@ class ViewController: UIViewController {
     //    let shape1 = Shape1()
     //    let shape2 = Shape2()
     
-    var gradientLayer: CAGradientLayer = {
+    //    [
+    //        UIColor(red: 255/255, green: 139/255, blue: 118/255, alpha: 1).cgColor,
+    //        UIColor(red: 87/255, green: 84/255, blue: 255/255, alpha: 1).cgColor
+    //    ]
+    
+    var xGradientLayer: CAGradientLayer = {
         var layer = CAGradientLayer()
         layer.type = .axial
         layer.colors = [
-            UIColor(red: 255/255, green: 139/255, blue: 118/255, alpha: 1).cgColor,
-            UIColor(red: 87/255, green: 84/255, blue: 255/255, alpha: 1).cgColor
+            UIColor.clear,
+            UIColor.clear
         ]
-        
-        layer.locations = [0.0, 1.0]
+        layer.opacity = 0.5
         
         return layer
     }()
+    
+    
+    var yGradientLayer: CAGradientLayer = {
+        var layer = CAGradientLayer()
+        layer.type = .axial
+        layer.startPoint = CGPoint(x: 0, y: 1)
+        layer.endPoint = CGPoint(x: 1, y: 1)
+        layer.colors = [
+            UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor,
+            UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor
+        ]
+        layer.opacity = 0.5
+        
+        return layer
+    }()
+    
+    
+    var zGradientLayer: CAGradientLayer = {
+        var layer = CAGradientLayer()
+        layer.type = .radial
+        layer.startPoint = CGPoint(x: 0.5, y: 0.5)
+        layer.endPoint = CGPoint(x: 1, y: 1)
+        layer.colors = [
+            UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor,
+            UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor
+        ]
+        layer.opacity = 1
+
+        return layer
+    }()
+    
     
     // Acceleration & rotation variables:
     var xAcceleration: Double = 0.0
@@ -57,7 +92,10 @@ class ViewController: UIViewController {
         
         view.backgroundColor = UIColor.white
         
-        view.layer.addSublayer(gradientLayer)
+        view.layer.addSublayer(zGradientLayer)
+        view.layer.addSublayer(yGradientLayer)
+        view.layer.addSublayer(xGradientLayer)
+        
         
         view.addSubview(xAccelerationLabel)
         xAccelerationLabel.text = "X Acceleration: \(xAcceleration)"
@@ -164,7 +202,9 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        gradientLayer.frame = self.view.bounds
+        xGradientLayer.frame = self.view.bounds
+        yGradientLayer.frame = self.view.bounds
+        zGradientLayer.frame = self.view.bounds
     }
     
     
@@ -220,24 +260,74 @@ class ViewController: UIViewController {
     // Animate the background color change
     func animateBackgroundColor() {
         UIView.animate(withDuration: 1) {
-            if self.zRotation < 0 {
-                self.gradientLayer.colors = [
-                    UIColor(red: 255/255, green: 139/255, blue: 118/255, alpha: 1).cgColor,
-                    UIColor(red: 87/255, green: 84/255, blue: 255/255, alpha: 1).cgColor
-                ]
-            } else if self.zRotation > 0 {
-                self.gradientLayer.colors = [
-                    UIColor(red: 87/255, green: 84/255, blue: 255/255, alpha: 1).cgColor,
-                    UIColor(red: 255/255, green: 139/255, blue: 118/255, alpha: 1).cgColor,
-                ]
-            } else {
-                self.gradientLayer.colors = [
-                    UIColor.systemGray,
-                    UIColor.lightGray
-                ]
-            }
+            self.xRotationAnimate()
+            self.yRotationAnimate()
+            self.zRotationAnimate()
         } // End animation
     } // End func
+    
+    
+    func xRotationAnimate() {
+        if self.xRotation < 0 {
+            self.xGradientLayer.colors = [
+                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor,
+                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor
+            ]
+        } else if self.xRotation > 0 {
+            self.xGradientLayer.colors = [
+                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor,
+                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor
+            ]
+        } else {
+            self.xGradientLayer.colors = [
+                UIColor.clear,
+                UIColor.clear
+            ]
+        }
+    } // End func
+    
+    
+    func yRotationAnimate() {
+        if self.yRotation < 0 {
+            self.yGradientLayer.colors = [
+                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor,
+                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor
+            ]
+        } else if self.yRotation > 0 {
+            self.yGradientLayer.colors = [
+                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor,
+                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor
+            ]
+        } else {
+            self.yGradientLayer.colors = [
+                UIColor.systemGray,
+                UIColor.lightGray
+            ]
+        }
+    } // End func
+    
+    
+    func zRotationAnimate() {
+        if self.zRotation < 0 {
+            self.zGradientLayer.colors = [
+                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor,
+                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor
+            ]
+        } else if self.zRotation > 0 {
+            self.zGradientLayer.colors = [
+                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor,
+                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor
+            ]
+        } else {
+            self.zGradientLayer.colors = [
+                UIColor.systemGray,
+                UIColor.lightGray
+            ]
+        }
+    } // End func
+    
+    
+    
     
     
     
