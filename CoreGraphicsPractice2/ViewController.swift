@@ -18,49 +18,6 @@ class ViewController: UIViewController {
     //        UIColor(red: 87/255, green: 84/255, blue: 255/255, alpha: 1).cgColor
     //    ]
     
-    var xGradientLayer: CAGradientLayer = {
-        var layer = CAGradientLayer()
-        layer.type = .axial
-        layer.colors = [
-            UIColor.clear,
-            UIColor.clear
-        ]
-        layer.opacity = 0.5
-        
-        return layer
-    }()
-    
-    
-    var yGradientLayer: CAGradientLayer = {
-        var layer = CAGradientLayer()
-        layer.type = .axial
-        layer.startPoint = CGPoint(x: 0, y: 1)
-        layer.endPoint = CGPoint(x: 1, y: 1)
-        layer.colors = [
-            UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor,
-            UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor
-        ]
-        layer.opacity = 0.5
-        
-        return layer
-    }()
-    
-    
-    var zGradientLayer: CAGradientLayer = {
-        var layer = CAGradientLayer()
-        layer.type = .radial
-        layer.startPoint = CGPoint(x: 0.5, y: 0.5)
-        layer.endPoint = CGPoint(x: 1, y: 1)
-        layer.colors = [
-            UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor,
-            UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor
-        ]
-        layer.opacity = 1
-
-        return layer
-    }()
-    
-    
     // Acceleration & rotation variables:
     var xAcceleration: Double = 0.0
     var yAcceleration: Double = 0.0
@@ -92,11 +49,7 @@ class ViewController: UIViewController {
         
         view.backgroundColor = UIColor.white
         
-        view.layer.addSublayer(zGradientLayer)
-        view.layer.addSublayer(yGradientLayer)
-        view.layer.addSublayer(xGradientLayer)
-        
-        
+
         view.addSubview(xAccelerationLabel)
         xAccelerationLabel.text = "X Acceleration: \(xAcceleration)"
         xAccelerationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -200,14 +153,6 @@ class ViewController: UIViewController {
     } // End viewDidLoad
     
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        xGradientLayer.frame = self.view.bounds
-        yGradientLayer.frame = self.view.bounds
-        zGradientLayer.frame = self.view.bounds
-    }
-    
-    
     // disable screen auto rotate
     override open var shouldAutorotate: Bool {
         return false
@@ -233,9 +178,7 @@ class ViewController: UIViewController {
                     self.xAccelerationLabel.text = "X Acceleration: \(self.xAcceleration)"
                     self.yAccelerationLabel.text = "Y Acceleration: \(self.yAcceleration)"
                     self.zAccelerationLabel.text = "Z Acceleration: \(self.zAcceleration)"
-                    
-                    
-                    
+
                     self.xRotation = data.attitude.pitch
                     self.yRotation = data.attitude.roll
                     self.zRotation = data.attitude.yaw
@@ -260,75 +203,23 @@ class ViewController: UIViewController {
     // Animate the background color change
     func animateBackgroundColor() {
         UIView.animate(withDuration: 1) {
-            self.xRotationAnimate()
+            //self.zRotationAnimate()
             self.yRotationAnimate()
-            self.zRotationAnimate()
-        } // End animation
-    } // End func
-    
-    
-    func xRotationAnimate() {
-        if self.xRotation < 0 {
-            self.xGradientLayer.colors = [
-                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor,
-                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor
-            ]
-        } else if self.xRotation > 0 {
-            self.xGradientLayer.colors = [
-                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor,
-                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor
-            ]
-        } else {
-            self.xGradientLayer.colors = [
-                UIColor.clear,
-                UIColor.clear
-            ]
-        }
-    } // End func
-    
-    
-    func yRotationAnimate() {
-        if self.yRotation < 0 {
-            self.yGradientLayer.colors = [
-                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor,
-                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor
-            ]
-        } else if self.yRotation > 0 {
-            self.yGradientLayer.colors = [
-                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor,
-                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor
-            ]
-        } else {
-            self.yGradientLayer.colors = [
-                UIColor.systemGray,
-                UIColor.lightGray
-            ]
+            self.xRotationAnimate()
         }
     } // End func
     
     
     func zRotationAnimate() {
-        if self.zRotation < 0 {
-            self.zGradientLayer.colors = [
-                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor,
-                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor
-            ]
-        } else if self.zRotation > 0 {
-            self.zGradientLayer.colors = [
-                UIColor(red: 46/255, green: 46/255, blue: 46/255, alpha: 1).cgColor,
-                UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1).cgColor
-            ]
-        } else {
-            self.zGradientLayer.colors = [
-                UIColor.systemGray,
-                UIColor.lightGray
-            ]
-        }
     } // End func
     
     
+    func yRotationAnimate() {
+    } // End func
     
     
+    func xRotationAnimate() {
+    } // End func
     
     
 } // End class
