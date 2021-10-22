@@ -15,6 +15,7 @@
 		C6A62C4B2723236100C93237 /* CoreGraphicsPatterns1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A62C4A2723236100C93237 /* CoreGraphicsPatterns1Tests.swift */; };
 		C6A62C552723236100C93237 /* CoreGraphicsPatterns1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A62C542723236100C93237 /* CoreGraphicsPatterns1UITests.swift */; };
 		C6A62C572723236100C93237 /* CoreGraphicsPatterns1UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A62C562723236100C93237 /* CoreGraphicsPatterns1UITestsLaunchTests.swift */; };
+		C6A62C642723251F00C93237 /* BackgroundPattern1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A62C632723251F00C93237 /* BackgroundPattern1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		C6A62C502723236100C93237 /* CoreGraphicsPatterns1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreGraphicsPatterns1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A62C542723236100C93237 /* CoreGraphicsPatterns1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsPatterns1UITests.swift; sourceTree = "<group>"; };
 		C6A62C562723236100C93237 /* CoreGraphicsPatterns1UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsPatterns1UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C6A62C632723251F00C93237 /* BackgroundPattern1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundPattern1.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				C6A62C332723235E00C93237 /* AppDelegate.swift */,
 				C6A62C352723235E00C93237 /* SceneDelegate.swift */,
 				C6A62C372723235E00C93237 /* MainViewController.swift */,
+				C6A62C632723251F00C93237 /* BackgroundPattern1.swift */,
 				C6A62C3C2723236100C93237 /* Assets.xcassets */,
 				C6A62C3E2723236100C93237 /* LaunchScreen.storyboard */,
 				C6A62C412723236100C93237 /* Info.plist */,
@@ -256,6 +259,7 @@
 			files = (
 				C6A62C382723235E00C93237 /* MainViewController.swift in Sources */,
 				C6A62C342723235E00C93237 /* AppDelegate.swift in Sources */,
+				C6A62C642723251F00C93237 /* BackgroundPattern1.swift in Sources */,
 				C6A62C362723235E00C93237 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
