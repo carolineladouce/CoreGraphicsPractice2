@@ -17,12 +17,83 @@ class BackgroundPattern1: UIView {
     }
     */
     
-    var lineColor: UIColor = .black
-    var fillColor: UIColor = .orange
+    var lineColor: UIColor = .white
+    var fillColor: UIColor = .black
     var patternSize: CGFloat = 300
+    
+    let patternWidth: CGFloat = 300
+    let patternHeight: CGFloat = 330
+    
+    let drawingLineWidth: CGFloat = 4.0
     
     
     override func draw(_ rect: CGRect) {
+        
+        // Draw the vertical line leading to arc
+        let verticalPath = UIBezierPath()
+        verticalPath.lineWidth = drawingLineWidth
+
+        verticalPath.move(to: CGPoint (
+            x: (bounds.width / 15) * 14.2,
+            y: bounds.height
+        ))
+
+        verticalPath.addLine(to: CGPoint(
+            x: (bounds.width / 15) * 14.2,
+            y: (bounds.height / 15) * 14.5
+        ))
+
+        lineColor.setStroke()
+        verticalPath.stroke()
+        
+        
+        
+        // Draw the arc
+//        let centerPoint = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
+        let centerPoint = CGPoint(x: (bounds.width / 15) * 14.75, y: (bounds.height / 15) * 14.5)
+//        let radius = max(bounds.width, bounds.height)
+        let radius = max(bounds.width / 15, bounds.height / 15)
+        
+        let startAngle: CGFloat = .pi
+        let endAngle: CGFloat = .pi * 1.5
+        
+        let innerPath = UIBezierPath(
+            arcCenter: centerPoint,
+            radius: radius/2,
+            startAngle: startAngle,
+            endAngle: endAngle,
+            clockwise: true
+        )
+        
+        innerPath.lineWidth = drawingLineWidth
+        lineColor.setStroke()
+        innerPath.stroke()
+        
+        
+        
+        // Draw the horizontal line trailing from arc
+        let horizontalPath = UIBezierPath()
+        horizontalPath.lineWidth = drawingLineWidth
+
+        horizontalPath.move(to: CGPoint (
+            x: (bounds.width / 15) * 14.75,
+            y: (bounds.height / 15) * 14
+        ))
+
+        horizontalPath.addLine(to: CGPoint(
+            x: bounds.width,
+            y: (bounds.height / 15) * 14
+        ))
+
+        lineColor.setStroke()
+        horizontalPath.stroke()
+        
+        
+        
+        
+        
+        
+        
 
 //        guard let context = UIGraphicsGetCurrentContext() else {
 //            fatalError("\(#function):\(#line) Failed to get current context.")
@@ -38,12 +109,12 @@ class BackgroundPattern1: UIView {
 
 //        UIColor.purple.setFill()
 //        drawingContext.fill(CGRect(x: 0, y: 0, width: drawingSize.width, height: drawingSize.height))
-        
-        let innerOvalPath = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: patternSize, height: patternSize))
-        
-        innerOvalPath.lineWidth = 4.0
-        fillColor.setStroke()
-        innerOvalPath.stroke()
+//
+//        let innerOvalPath = UIBezierPath(ovalIn: CGRect(x: 150, y: 150, width: patternSize / 4, height: patternSize / 4))
+//
+//        innerOvalPath.lineWidth = 4.0
+//        lineColor.setStroke()
+//        innerOvalPath.stroke()
 //
 //        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { fatalError("""
 //    \(#function):\(#line) Failed to \

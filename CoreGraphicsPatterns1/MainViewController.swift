@@ -29,9 +29,9 @@ class MainViewController: UIViewController {
         backgroundPattern1.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         backgroundPattern1.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         backgroundPattern1.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        backgroundPattern1.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        backgroundPattern1.heightAnchor.constraint(equalToConstant: 330).isActive = true
         
-        
+//        backgroundPattern1.backgroundColor = UIColor.clear
 //        backgroundPattern1.translatesAutoresizingMaskIntoConstraints = false
 //        backgroundPattern1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
 //        backgroundPattern1.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
