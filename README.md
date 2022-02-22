@@ -1,1 +1,1 @@
-# CoreGraphicsPractice2
+# Core Graphics Practice
